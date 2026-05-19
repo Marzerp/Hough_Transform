@@ -56,7 +56,7 @@ public:
         MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
         
         // Parámetros por defecto
-        rho_res = 2;
+        rho_res = 1;
         theta_res = M_PI / 180.0;
         umbral_votos = 1450;
         ventana_x = 51;
@@ -112,10 +112,12 @@ public:
             print_master("Memoria total (todos procesos): " + to_string(memoria_acumulador * num_procs / (1024*1024)) + " MB");
             
             // Encontrar todos los puntos de borde
+            int np = 0;
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    if (bordes.at<uchar>(y, x) > 0) {
+                    if (bordes.at<uchar>(y, x) > 0 && np < 500000) {
                         puntos_borde_global.push_back(Point(x, y));
+                        np++;
                     }
                 }
             }
