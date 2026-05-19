@@ -56,7 +56,7 @@ public:
         MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
         
         // Parámetros por defecto
-        rho_res = 1;
+        rho_res = 2;
         theta_res = M_PI / 180.0;
         umbral_votos = 1450;
         ventana_x = 51;
@@ -187,7 +187,7 @@ public:
         }
         
         // Calcular acumulador local (usando uint16_t)
-        for (int i=0; i < 1; i++){
+        for (int i=0; i < 10; i++){
           acumulador_local.assign(n_rho * n_theta, 0);
           calcular_acumulador_optimizado(puntos_locales, acumulador_local);
         }
