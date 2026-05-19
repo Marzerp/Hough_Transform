@@ -115,7 +115,7 @@ public:
             int np = 0;
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    if (bordes.at<uchar>(y, x) > 0 && np < 500000) {
+                    if (bordes.at<uchar>(y, x) > 0 && np < 400000) {
                         puntos_borde_global.push_back(Point(x, y));
                         np++;
                     }
