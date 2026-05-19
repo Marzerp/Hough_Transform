@@ -57,7 +57,7 @@ public:
         
         // Parámetros por defecto
         rho_res = 1;
-        theta_res = M_PI / 180.0/10.0;
+        theta_res = M_PI / 180.0;
         umbral_votos = 1450;
         ventana_x = 51;
         ventana_y = 7;
