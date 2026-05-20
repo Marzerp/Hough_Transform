@@ -4,7 +4,7 @@ OUTPUT="resultados.csv"
 
 echo "procesos,ejecucion,tiempo" > $OUTPUT
 
-for N in 1 2 4
+for N in 1 2 3 4
 do
     echo "======================================"
     echo "Benchmark con $N procesos"
