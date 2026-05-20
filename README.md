@@ -57,7 +57,7 @@ Para reducir el tiempo requerido, **es conveniente paralelizar la ejecución en 
 
 La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al variar el número de procesadores MPI (1, 2, 3, 4) en un clúster de 4 nodos. Se observa una disminución clara del tiempo promedio de ejecución conforme aumenta el número de procesadores. Los datos graficados consideran los resultados de ejecutar el código 10 veces en cada ocasión.
 
-![Tiempo promedio por proceso](plot.png)
+![Tiempo promedio por proceso](results/plot.png)
 
 - Con 1 procesador, el tiempo promedio es cercano a 36 s.
 - Al pasar a 2 procesadores, el tiempo cae hasta aproximadamente 21 s.
