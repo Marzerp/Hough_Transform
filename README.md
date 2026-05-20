@@ -66,7 +66,7 @@ La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al
 
 -------------------
 
-##Requisitos
+## Requisitos
 - OpenCV instalado en todos los nodos del clúster.
 - MPI (Intel MPI o MPICH) instalado y configurado con **acceso SSH sin contraseña** entre nodos.
 - Compilador compatible con C++11 o superior.
