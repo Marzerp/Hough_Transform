@@ -75,10 +75,10 @@ La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al
 
 ## Ejecución
 
-El programa acepta dos argumentos:
+El programa acepta un argumento de entrada:
 
 1. **Imagen de entrada** (binaria de bordes). En este caso`images/bordes_binarios.jpg`.
-2. **Imagen de salida** (líneas dibujadas). En este caso `results/lineas_finales_hough_paralelo.jpg`.
+
 
 ### Compilación
 
