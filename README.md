@@ -1,44 +1,82 @@
-# Hough_Transform
+# Transformada de Hough en Paralelo
+
+
+Este proyecto implementa la **Transformada de Hough** para detección de líneas en imágenes, utilizando **MPI** (Message Passing Interface) para paralelizar el cómputo en un clúster de múltiples nodos.  
+El código está escrito en C++ con las bibliotecas **OpenCV** (para manejo de imágenes) y **MPI** (para comunicación entre procesos).
 
 -----------
 
-En el campo del procesamiento de imágenes y la visión artificial, uno de los desafíos más críticos es la extracción de características geométricas a partir de datos visuales crudos. Las imágenes del mundo real suelen presentar ruido, variaciones de iluminación y formas incompletas.
+## Introducción 
 
-El problema principal radica en que los algoritmos de detección de bordes tradicionales (como Canny o Sobel) entregan nubes de puntos o fragmentos de líneas, pero no "comprenden" la estructura global de la imagen.Permite identificar que un conjunto de píxeles dispersos pertenece, a una misma entidad (como una carretera, un borde de un documento o una tubería).
+La Transformada de Hough es una técnica ampliamente utilizada en visión por computadora para la detección de líneas rectas a partir de imágenes binarias, generalmente obtenidas mediante algoritmos de detección de bordes como Canny.
+
+El método transforma cada píxel de borde de la imagen hacia un espacio paramétrico definido por $(ρ, θ)$, donde, $ρ$ representa la distancia del origen a la línea considerando una trayectoría perpendicular a la línea y $θ$ representa el ángulo de ese trayectoría con respecto al eje x. Cada combinación representa una posible línea recta. 
+
+Para ello, el algoritmo evalúa todos los posibles ángulos $θ$ y calcula el valor correspondiente de $ρ = x·cosθ + y·sinθ$, registrando un “voto” en la posición $(ρ, θ)$ en una matriz bidimensional conocida como acumulador. Cuando se procesan dos puntos, hay una posición del acumulador que registra dos votos, indicando que los parámetros correspondientes a esa posición corresponde a la recta que une los puntos.
+
+Cuando múltiples píxeles coinciden a lo largo de una misma recta se genera una alta concentración de votos en una posición del acumulador. De esta manera, detectar las rectas presentes en la imagen se reduce a encontrar las posiciones del acumulador con votos más altos.
+
 
 -----------
 
-Este proyecto implementa la Transformada de Hough para transformar el problema de detección del espacio de la imagen al espacio de parámetros.Al utilizar la representación polar de las rectas:
+## Complejidad computacional
 
- $x \cos(\theta) + y \sin(\theta) = \rho$
+Para una imagen que tiene $D$ pixeles en su diagonal, $n$ pixeles de bordes y $w$ posibles valores del ángulo $θ$, la complejidad es $**O(n w)**$.
 
- -----------
+- En imágenes reales (por ejemplo, de 28 MP puede haber miles de pixeles de bordes), este proceso puede tomar varios segundos o incluso minutos en un solo procesador.
+- El acumulador puede ser enorme (por ejemplo, $D × w$ celdas), lo que exige mucha memoria.
 
-Complejidad del Espacio de Búsqueda
+Para reducir el tiempo requerido, **es conveniente paralelizar la ejecución en múltiples procesadores** para obtener resultados en tiempos razonables.
 
-Para cada píxel de borde detectado, debemos calcular múltiples valores de $\rho$ para un rango completo de ángulos $\theta$ (0° a 180°). Si una imagen tiene miles de puntos de borde, realizamos miles de operaciones.
 
- -----------
+-------------
 
-Paralelización por Segmentación
+## Paralelización 
 
-Para acelerar el proceso, podemos dividir la carga de trabajo:
+1. **El proceso maestro (rank 0)** lee la imagen de bordes binarizada, extrae los puntos de bordes y los distribuye equitativamente entre todos los procesos.
 
-En lugar de procesar la imagen completa con un solo núcleo, dividimos la imagen en bloques horizontales y verticales.
+2. **Cada proceso** recibe una lista de puntos y para cada punto (x,y), recorre los ángulos $θ$, calcula $ρ=xcos(θ)+ysin(θ)$ e incrementa el bin correspondiente del acumulador $(ρ, θ)$.
 
-- Distribución: Cada procesador recibe un segmento de la imagen.
+3. **Reducción global** MPI suma todos los acumuladores parciales en un acumulador global único (en el maestro). 
 
-- Detección Local: Cada núcleo calcula los bordes y las curvas de Hough para su sección.
+4. **El maestro** conserva únicamente los máximos locales y dibuja las líneas encontradas.
 
-- Reducción Global: Al final, los acumuladores locales se combinan en un acumulador global para identificar las líneas que cruzan varios segmentos.
 
 ---------------
 
-Bordes de Cany 
+## Optimizaciones adicionales
 
- <img width="515" height="375" alt="image" src="https://github.com/user-attachments/assets/8225c246-e86a-4e99-bc1d-c2e615f03681" />
+- Se utiliza **`uint16_t`** (entero sin signo de 2 bytes) para almacenar el acumulador en lugar de `int` (4 bytes), reduciendo a la mitad la memoria necesaria y el tráfico de comunicaciones. También las posiciones (x,y) de cada punto se maneja como uint16_t para reducir el tiempo de envío de la lista de puntos. 
+
+- El código verifica desbordamiento (máximo 65535 votos), suficiente para imágenes moderadas.
+
+-------------------
 
 
-Transformada de Hough 
+## Resultados 
 
-<img width="515" height="353" alt="image" src="https://github.com/user-attachments/assets/a04d8747-7280-46d4-92fa-b1d6f68669e4" />
+La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al variar el número de procesadores MPI (1, 2, 3, 4) en un clúster de 4 nodos. Se observa una disminución clara del tiempo promedio de ejecución conforme aumenta el número de procesadores. Los datos graficados consideran los resultados de ejecutar el código 10 veces en cada ocasión.
+
+![Tiempo promedio por proceso](plot.png)
+
+- Con 1 procesador, el tiempo promedio es cercano a 36 s.
+- Al pasar a 2 procesadores, el tiempo cae hasta aproximadamente 21 s.
+- Con 3 y 4 procesadores, el tiempo sigue disminuyendo, aunque más gradualmente, llegando a cerca de 13 s con 4 procesadores.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
