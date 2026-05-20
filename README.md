@@ -21,7 +21,7 @@ Cuando múltiples píxeles coinciden a lo largo de una misma recta se genera una
 
 ## Complejidad computacional
 
-Para una imagen que tiene $D$ pixeles en su diagonal, $n$ pixeles de bordes y $w$ posibles valores del ángulo $θ$, la complejidad es $**O(n w)**$.
+Para una imagen que tiene $D$ pixeles en su diagonal, $n$ pixeles de bordes y $w$ posibles valores del ángulo $θ$, la complejidad es $ **O(n w)** $.
 
 - En imágenes reales (por ejemplo, de 28 MP puede haber miles de pixeles de bordes), este proceso puede tomar varios segundos o incluso minutos en un solo procesador.
 - El acumulador puede ser enorme (por ejemplo, $D × w$ celdas), lo que exige mucha memoria.
