@@ -6,13 +6,25 @@ El código está escrito en C++ con las bibliotecas **OpenCV** (para manejo de i
 
 -----------
 
+## Autor y contacto
+
+Este proyecto fue desarrollado por **Araceli Romero**, estudiante de la Licenciatura en *Tecnologías para la Información en Ciencias (TICs)* en la Universidad Nacional Autónoma de México [UNAM](https://www.unam.mx/), México. 
+
+La implementación de la Transformada de Hough en paralelo fue desarrollada como parte de la asignatura de *Cómputo de Alto Rendimiento (HPC)* durante el semestre 2026-2.
+
+Si tienes preguntas, comentarios o propuestas de colaboración, puedes contactarme en:  
+araceliromerozerpa@gmail.com
+
+
+-----------
+
 ## Introducción 
 
 La Transformada de Hough es una técnica ampliamente utilizada en visión por computadora para la detección de líneas rectas a partir de imágenes binarias, generalmente obtenidas mediante algoritmos de detección de bordes como Canny.
 
-El método transforma cada píxel de borde de la imagen hacia un espacio paramétrico definido por $(ρ, θ)$, donde, $ρ$ representa la distancia del origen a la línea considerando una trayectoría perpendicular a la línea y $θ$ representa el ángulo de ese trayectoría con respecto al eje x. Cada combinación representa una posible línea recta. 
+El método transforma cada píxel de borde de la imagen hacia un espacio paramétrico definido por $(ρ, θ)$, donde, $ρ$ representa la distancia del origen a la línea considerando una trayectoria perpendicular a la línea y $θ$ representa el ángulo de ese trayectoria con respecto al eje x. Cada combinación representa una posible línea recta. 
 
-Para ello, el algoritmo evalúa todos los posibles ángulos $θ$ y calcula el valor correspondiente de $ρ = x·cosθ + y·sinθ$, registrando un “voto” en la posición $(ρ, θ)$ en una matriz bidimensional conocida como acumulador. Cuando se procesan dos puntos, hay una posición del acumulador que registra dos votos, indicando que los parámetros correspondientes a esa posición corresponde a la recta que une los puntos.
+Para ello, el algoritmo evalúa todos los posibles ángulos $θ$ y calcula el valor correspondiente de $ρ = x·cosθ + y·sinθ$, registrando un “voto” en la posición $(ρ, θ)$ en una matriz bidimensional conocida como acumulador. Cuando se procesan dos puntos, hay una posición del acumulador que registra dos votos, indicando que los parámetros correspondientes a esa posición corresponden a la recta que une los puntos.
 
 Cuando múltiples píxeles coinciden a lo largo de una misma recta se genera una alta concentración de votos en una posición del acumulador. De esta manera, detectar las rectas presentes en la imagen se reduce a encontrar las posiciones del acumulador con votos más altos.
 
@@ -21,9 +33,9 @@ Cuando múltiples píxeles coinciden a lo largo de una misma recta se genera una
 
 ## Complejidad computacional
 
-Para una imagen que tiene $D$ pixeles en su diagonal, $n$ pixeles de bordes y $w$ posibles valores del ángulo $θ$, la complejidad es $ **O(n w)** $.
+Para una imagen que tiene $D$ píxeles en su diagonal, $n$ píxeles de bordes y $w$ posibles valores del ángulo $θ$, la complejidad es $O(n w)$.
 
-- En imágenes reales (por ejemplo, de 28 MP puede haber miles de pixeles de bordes), este proceso puede tomar varios segundos o incluso minutos en un solo procesador.
+- En imágenes reales (por ejemplo, de 28 MP puede haber miles de píxeles de bordes), este proceso puede tomar varios segundos o incluso minutos en un solo procesador.
 - El acumulador puede ser enorme (por ejemplo, $D × w$ celdas), lo que exige mucha memoria.
 
 Para reducir el tiempo requerido, **es conveniente paralelizar la ejecución en múltiples procesadores** para obtener resultados en tiempos razonables.
@@ -98,7 +110,7 @@ export I_MPI_SHM=0
 time mpiexec -n 1 -f ../machinefile  ./hough_mpi ./images/bordes_binarios.jpg 
 ```
 
-### Ejecución en cluster 
+### Ejecución en clúster 
 
 ```bash
 time mpiexec -n 4 -f ../machinefile  ./hough_mpi ./images/bordes_binarios.jpg 
