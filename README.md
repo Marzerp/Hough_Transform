@@ -119,12 +119,11 @@ El programa generará dos archivos:
 
 ## Ejemplo de ejecución 
 
-![Imagen binaria de bordes (entrada)](images/bordes_binarios.jpg)
+<h3>Imagen binaria de bordes (entrada)</h3>
+<img src="images/bordes_binarios.jpg" width="350"/>
 
-![Imagen procesada con las líneas detectadas.](results/lineas_finales_hough_paralelo.jpg)
-
-
-
+<h3>Imagen procesada con las líneas detectadas</h3>
+<img src="results/lineas_finales_hough_paralelo.jpg" width="350"/>
 
 
 
