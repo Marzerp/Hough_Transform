@@ -64,6 +64,53 @@ La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al
 - Con 3 y 4 procesadores, el tiempo sigue disminuyendo, aunque más gradualmente, llegando a cerca de 13 s con 4 procesadores.
 
 
+-------------------
+
+## Compilación y ejecución
+
+### Requisitos
+- OpenCV instalado en todos los nodos del clúster.
+- MPI (Intel MPI o MPICH) instalado y configurado con **acceso SSH sin contraseña** entre nodos.
+- Compilador compatible con C++11 o superior.
+
+
+### Compilación
+
+En el nodo maestro:
+
+```bash
+mpicxx -O0 -o hough_mpi hough_mpi.cpp `pkg-config --cflags --libs opencv4` -lm
+```
+
+### Ejecución en un nodo 
+
+```bash
+export I_MPI_SHM=0
+```
+
+```bash
+time mpiexec -n 1 -f ../machinefile  ./hough_mpi ./images/bordes_binarios.jpg 
+```
+
+### Ejecución en cluster 
+
+```bash
+time mpiexec -n 4 -f ../machinefile  ./hough_mpi ./images/bordes_binarios.jpg 
+```
+
+------------
+
+## Salida del programa 
+
+El programa generará dos archivos:
+
+- lineas_finales_hough_paralelo.jpg – imagen con las líneas detectadas.
+
+- resultados_hough_paralelo.txt – estadísticas del acumulador y lista de líneas.
+
+
+
+
 
 
 
