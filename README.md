@@ -66,13 +66,19 @@ La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al
 
 -------------------
 
-## Compilación y ejecución
-
-### Requisitos
+##Requisitos
 - OpenCV instalado en todos los nodos del clúster.
 - MPI (Intel MPI o MPICH) instalado y configurado con **acceso SSH sin contraseña** entre nodos.
 - Compilador compatible con C++11 o superior.
 
+------------------
+
+## Ejecución
+
+El programa acepta dos argumentos:
+
+1. **Imagen de entrada** (binaria de bordes). En este caso`images/bordes_binarios.jpg`.
+2. **Imagen de salida** (líneas dibujadas). En este caso `results/lineas_finales_hough_paralelo.jpg`.
 
 ### Compilación
 
@@ -108,6 +114,14 @@ El programa generará dos archivos:
 
 - resultados_hough_paralelo.txt – estadísticas del acumulador y lista de líneas.
 
+
+---------------
+
+## Ejemplo de ejecución 
+
+![Imagen binaria de bordes (entrada)](images/bordes_binarios.jpg)
+
+![Imagen procesada con las líneas detectadas.](results/lineas_finales_hough_paralelo.jpg)
 
 
 
