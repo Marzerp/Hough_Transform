@@ -138,7 +138,11 @@ El programa generará dos archivos:
 <img src="results/lineas_finales_hough_paralelo.jpg" width="350"/>
 
 
+-----------
 
+## Licencia
+
+Este proyecto está bajo la liciencia GNU GPL v3.0.
 
 
 
