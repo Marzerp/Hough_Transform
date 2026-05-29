@@ -137,6 +137,10 @@ El programa generará dos archivos:
 <h3>Imagen procesada con las líneas detectadas</h3>
 <img src="results/lineas_finales_hough_paralelo.jpg" width="350"/>
 
+<h3>Acumulador de Hough</h3>
+<img src="results/acumulador_hough.jpeg" width="350"/>
+
+
 
 -----------
 
