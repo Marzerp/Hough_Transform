@@ -1,0 +1,18 @@
+procesos,ejecucion,tiempo
+5,1,Abort(673334159) on node 0 (rank 0 in comm 0): Fatal error in internal_Init: Other MPI error, error stack:
+internal_Init(43633).........: MPI_Init(argc=0x7ffd470142a4, argv=0x7ffd47014298) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2379).....: OFI EP enable failed (ofi_init.c:2379:create_vni_context:Address already in use)
+Command exited with non-zero status 143
+1.23
+5,2,17.04
+5,3,Abort(941769615) on node 0 (rank 0 in comm 0): Fatal error in internal_Init: Other MPI error, error stack:
+internal_Init(43633).........: MPI_Init(argc=0x7ffc09ad69a4, argv=0x7ffc09ad6998) failed
+MPII_Init_thread(118)........: 
+MPID_Init(1778)..............: 
+MPIDI_OFI_mpi_init_hook(1739): 
+create_vni_context(2379).....: OFI EP enable failed (ofi_init.c:2379:create_vni_context:Address already in use)
+Command exited with non-zero status 143
+1.42

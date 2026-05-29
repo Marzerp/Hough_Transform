@@ -1,0 +1,32 @@
+=== TRANSFORMADA DE HOUGH PARALELA CON MPI (FULL uint16_t) ===
+
+Dimensiones de la imagen: 6120 x 4596
+Diagonal: 7653 píxeles
+Procesos utilizados: 5
+
+Parámetros:
+  - Umbral de votos: 1450
+  - Ventana supresión: 51x7
+  - Distancia mínima ρ: 60
+  - Distancia mínima θ: 4 grados
+
+Estadísticas del acumulador:
+  - Máximo de votos: 3128
+  - Mínimo de votos: 0
+  - Media de votos: 39.10
+
+Optimización:
+  - Tipo de dato: uint16_t (2 bytes)
+  - Ahorro de memoria: 50% vs int (4 bytes)
+  - Ahorro en comunicaciones: 50%
+
+Líneas detectadas: 6
+
+  #   Rho (píxeles)   Theta (grados)   Votos
+  -   -------------   --------------   -----
+   1      867.0        124.00        3128
+   2     3173.0         41.40        3045
+   3     2451.0        129.20        2544
+   4     4924.0         33.40        2286
+   5     -348.0        119.80        2060
+   6     1692.0         48.00        1817

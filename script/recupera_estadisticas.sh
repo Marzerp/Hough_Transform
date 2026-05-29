@@ -23,7 +23,8 @@ do
             (/usr/bin/time -f "%e" \
             mpiexec -n $N -f ../machinefile \
             ./hough_mpi ./images/bordes_binarios.jpg \
-            > /dev/null 2>/dev/null) 2>&1
+            > /dev/null) 2>&1
+
         )
 
         # Validar que sea numérico
