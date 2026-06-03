@@ -165,6 +165,8 @@ Este proyecto está bajo la liciencia GNU GPL v3.0.
 
 ## Referencias de apoyo de Deepseek 
 
+Se solicitó ayuda a deepseek para escribir código en python para procesamiento de imágenes usando opencv2. Posteriormente cuando se logró una versión estable de la transformada de Hough, se pidió ayuda para traducir el código a c++ usando MPI. Finalmente, se hizo la optimización de cambiar enteros de 32 bits a 16 bits, para las coordenadas de los puntos de borde y para el acumulador. 
+
 - https://chat.deepseek.com/share/krcmt8r043pykmby6d
 - https://chat.deepseek.com/share/06c6o5yxfbu2h4kh0l
 
