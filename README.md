@@ -148,6 +148,12 @@ El programa generará dos archivos:
 
 Este proyecto está bajo la liciencia GNU GPL v3.0.
 
+----------
+
+## Referencias de apoyo de Deepseek 
+
+- https://chat.deepseek.com/share/krcmt8r043pykmby6d
+- https://chat.deepseek.com/share/06c6o5yxfbu2h4kh0l
 
 
 
