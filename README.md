@@ -65,16 +65,29 @@ Para reducir el tiempo requerido, **es conveniente paralelizar la ejecución en 
 -------------------
 
 
-## Resultados 
+## Resultados en clúster AWS
 
-La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al variar el número de procesadores MPI (1, 2, 3, 4) en un clúster de 4 nodos. Se observa una disminución clara del tiempo promedio de ejecución conforme aumenta el número de procesadores. Los datos graficados consideran los resultados de ejecutar el código 10 veces en cada ocasión.
+La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al variar el número de procesadores MPI (1, 2, 3, 4, 5, 6, 7, 8) en un clúster de 4 nodos. Se observa una disminución clara del tiempo promedio de ejecución conforme aumenta el número de procesadores. Los datos graficados consideran los resultados de ejecutar el código 10 veces en cada ocasión.
 
-![Tiempo promedio por proceso](results/plot.png)
+![Tiempo promedio por proceso](results/plot2.png)
 
 - Con 1 procesador, el tiempo promedio es cercano a 36 s.
 - Al pasar a 2 procesadores, el tiempo cae hasta aproximadamente 21 s.
 - Con 3 y 4 procesadores, el tiempo sigue disminuyendo, aunque más gradualmente, llegando a cerca de 13 s con 4 procesadores.
+- A partir de 5 procesadores el tiempo aumenta y progresivamente vuelve a bajar, hasta acercarse al tiempo de 4 procesadores utilizando 8 procesadores. 
 
+*Nota: las 4 instancias de AWS cuentan con 4 núcleos y cada uno permite 2 hilos, dándo la impresión de tener 8 núcleos (lógicos, no físicos), esto explica el incremento de tiempo cuando pasamos de 4 a más procesadores. 
+
+ 
+-------------------
+
+## Resultados locales
+
+La gráfica muestra el tiempo promedio de ejecución ± desviación estándar al variar el número de procesadores MPI (1, 2, 3, 4, 5, 6, 7, 8) en mi pc local, la cual tiene 8 núcleos físicos. Se observa una disminución clara del tiempo promedio de ejecución conforme aumenta el número de procesadores. Los datos graficados consideran los resultados de ejecutar el código 10 veces en cada ocasión.
+
+![Tiempo promedio por proceso](results/plotloc.png)
+
+Se observa el comportamiento esperado de disminución del tiempo al incrementarse el número de procesadores. 
 
 -------------------
 
