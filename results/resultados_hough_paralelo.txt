@@ -2,7 +2,7 @@
 
 Dimensiones de la imagen: 6120 x 4596
 Diagonal: 7653 píxeles
-Procesos utilizados: 4
+Procesos utilizados: 8
 
 Parámetros:
   - Umbral de votos: 1450
