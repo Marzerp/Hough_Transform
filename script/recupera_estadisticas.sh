@@ -23,7 +23,7 @@ do
 
         # Captura de tiempo (funciona con punto decimal)
         T=$(/usr/bin/time -f "%e" \
-            mpiexec -n ../machinefile ./hough_mpi "$IMAGEN" \
+            mpiexec -n $N -f ../machinefile ./hough_mpi "$IMAGEN" \
             2>&1 > /dev/null)
 
         # Validar que T es un número (puede incluir punto)
